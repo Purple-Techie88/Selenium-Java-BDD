@@ -1,15 +1,25 @@
 package mission;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
-import java.text.MessageFormat;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserSetup extends BasePage {
+
+    public BrowserSetup(WebDriver driver) {
+        this.driver = driver;
+
+    }
+
 
     public static String browser = null;
     private static final String CHROME_WIN = "src\\test\\java\\BrowserDirectory\\chromedriver.exe";
@@ -25,14 +35,19 @@ public class BrowserSetup extends BasePage {
 
     /**
      * Function for multi browser
+     * @return 
      */
-    public void selectBrowser() {
+    public WebDriver selectBrowser() {
         browser = LoadProp.getProperty("Browser");
 
         if (browser.equalsIgnoreCase("Chrome")) {
             //System.setProperty("webdriver.chrome.driver", CHROME_WIN);
+            ChromeOptions options = new ChromeOptions();
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("profile.password_manager_leak_detection", false);
+            options.setExperimentalOption("prefs", prefs);
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
             //System.setProperty("webdriver.edge.driver", EDGE);
             WebDriverManager.edgedriver().setup();
@@ -56,5 +71,6 @@ public class BrowserSetup extends BasePage {
         } else {
             Assert.fail(MessageFormat.format("Wrong Browser: {0}", browser));
         }
+                return driver;
     }
 }

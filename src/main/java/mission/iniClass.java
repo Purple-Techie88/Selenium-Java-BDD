@@ -5,6 +5,5 @@ public class iniClass {
 
 
     public iniClass() {
-        samplePage = new SamplePage();
     }
 }

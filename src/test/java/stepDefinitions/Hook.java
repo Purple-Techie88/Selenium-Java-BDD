@@ -1,12 +1,4 @@
-package mission;
-
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+package stepDefinitions;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +6,31 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.NoSuchSessionException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import mission.BasePage;
+import mission.BrowserSetup;
+import mission.LoadProp;
+import mission.iniClass;
+
 public class Hook extends BasePage {
 
-    BrowserSetup browsersetup = new BrowserSetup();
     private static final int WAIT_SEC = 20;
 
 
-    @Before()
+    @Before
     public void initializeTest() {
-        browsersetup.selectBrowser();
+        BrowserSetup browsersetup = new BrowserSetup(driver);
+        driver = browsersetup.selectBrowser();
+
+        BasePage.driver = driver;
+
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(WAIT_SEC, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(WAIT_SEC, TimeUnit.SECONDS);
@@ -33,7 +41,7 @@ public class Hook extends BasePage {
     /**
      * Executed after each UI tagged scenario
      */
-    @After()
+    @After
     public void screenshot(Scenario scenario) {
         String screenShotFilename = scenario.getName().replace(" ", "")
                 + new Timestamp(new Date().getTime()).toString().replaceAll("[^a-zA-Z0-9]", "")
@@ -52,4 +60,3 @@ public class Hook extends BasePage {
         }
     }
 }
-

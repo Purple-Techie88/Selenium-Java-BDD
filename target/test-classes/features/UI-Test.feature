@@ -3,8 +3,8 @@ Feature: Checkout items in the basket
 
   Scenario: Check item total cost and tax
     Given I am on the home page
-    And I login in with the following details
-      | userName      | Password     |
+    And I log in with the following details
+      | userName      | password     |
       | standard_user | secret_sauce |
 
     And I add the following items to the basket
