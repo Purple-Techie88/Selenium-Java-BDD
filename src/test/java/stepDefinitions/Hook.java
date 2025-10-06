@@ -19,22 +19,19 @@ import mission.BrowserSetup;
 import mission.LoadProp;
 import mission.iniClass;
 
-public class Hook extends BasePage {
+public class Hook{
 
     private static final int WAIT_SEC = 20;
 
 
     @Before
     public void initializeTest() {
-        BrowserSetup browsersetup = new BrowserSetup(driver);
-        driver = browsersetup.selectBrowser();
-
-        BasePage.driver = driver;
-
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().pageLoadTimeout(WAIT_SEC, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(WAIT_SEC, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(WAIT_SEC, TimeUnit.SECONDS);
+        BrowserSetup browsersetup = new BrowserSetup(BasePage.driver);
+        BasePage.driver = browsersetup.selectBrowser();
+        BasePage.driver.manage().deleteAllCookies();
+        BasePage.driver.manage().timeouts().pageLoadTimeout(WAIT_SEC, TimeUnit.SECONDS);
+        BasePage.driver.manage().timeouts().implicitlyWait(WAIT_SEC, TimeUnit.SECONDS);
+        BasePage.driver.manage().timeouts().setScriptTimeout(WAIT_SEC, TimeUnit.SECONDS);
         new iniClass();
     }
 
@@ -46,16 +43,16 @@ public class Hook extends BasePage {
         String screenShotFilename = scenario.getName().replace(" ", "")
                 + new Timestamp(new Date().getTime()).toString().replaceAll("[^a-zA-Z0-9]", "")
                 + "_" + LoadProp.getProperty("Browser") + ".jpg";
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) BasePage.driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(scrFile, new File(LoadProp.getProperty("ScreenshotLocation") + screenShotFilename));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        driver.close();
+        // driver.close();
         //Handling the NoSuchSessionException with Firefox browser after close
         try {
-            driver.quit();
+            // driver.quit();
         } catch (NoSuchSessionException ex) {
         }
     }

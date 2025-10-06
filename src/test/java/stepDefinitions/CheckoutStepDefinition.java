@@ -6,12 +6,13 @@ import java.util.Map;
 import org.testng.Assert;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import mission.BasePage;
+import mission.CheckoutStepOnePage;
+import mission.CheckoutStepTwoPage;
 import mission.InventoryPage;
 import mission.LoginPage;
 import mission.ShoppingCartPage;
@@ -21,6 +22,12 @@ public class CheckoutStepDefinition {
     InventoryPage inventoryPage;
     BasePage basePage;
     ShoppingCartPage shoppingCartPage;
+    CheckoutStepOnePage checkoutStepOnePage;
+    CheckoutStepTwoPage checkoutStepTwoPage;
+
+
+    public CheckoutStepDefinition() {
+    }
 
     @Given("^I am on the home page$")
     public void iAmOnTheHomePage() {
@@ -45,74 +52,81 @@ public class CheckoutStepDefinition {
     inventoryPage.addItemsToCart(items);
 }
 
-@Given("^I  should see (\\d+) items added to the shopping cart$")
-public void i_should_see_items_added_to_the_shopping_cart(int arg1) {
+    @Given("^I  should see (\\d+) items added to the shopping cart$")
+    public void i_should_see_items_added_to_the_shopping_cart(int itemsAdded) {
     basePage = new BasePage();
-    Assert.assertEquals(basePage.getCartItemCount(), 4);
+    Assert.assertEquals(basePage.getCartItemCount(), itemsAdded);
 }
 
-@Given("^I click on the shopping cart$")
-public void i_click_on_the_shopping_cart(){
+    @Given("^I click on the shopping cart$")
+    public void i_click_on_the_shopping_cart(){
     shoppingCartPage = new ShoppingCartPage();
     shoppingCartPage.clickShoppingCartButton();
 }
 
-@Given("^I verify that the QTY count for each item should be (\\d+)$")
-public void i_verify_that_the_QTY_count_for_each_item_should_be(int arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+    @Given("^I verify that the QTY count for each item should be (\\d+)$")
+    public void i_verify_that_the_QTY_count_for_each_item_should_be(int expectedQty) {
+        List<String> qty = shoppingCartPage.getQtyForAllItems();
+
+        for (String quantity : qty){
+            Assert.assertEquals(quantity, String.valueOf(expectedQty));
+        }
+    
 }
 
 @Given("^I remove the following item:$")
-public void i_remove_the_following_item(DataTable arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-    // E,K,V must be a scalar (String, Integer, Date, enum etc)
-    throw new PendingException();
+public void i_remove_the_following_item(DataTable dataTable) {
+    List<String> items = dataTable.asList(String.class);
+    for (String item : items) {
+    shoppingCartPage.removeItemFromCart(item);
+    }
 }
 
 @Given("^I click on the CHECKOUT button$")
-public void i_click_on_the_CHECKOUT_button() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+public void i_click_on_the_CHECKOUT_button(){
+    shoppingCartPage.clickCheckoutbutton();
 }
 
 @Given("^I type \"([^\"]*)\" for First Name$")
-public void i_type_for_First_Name(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+public void i_type_for_First_Name(String firstName){
+    checkoutStepOnePage = new CheckoutStepOnePage();
+    checkoutStepOnePage.completeFirstNameField(firstName);
 }
 
 @Given("^I type \"([^\"]*)\" for Last Name$")
-public void i_type_for_Last_Name(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+public void i_type_for_Last_Name(String lastName){
+    checkoutStepOnePage = new CheckoutStepOnePage();
+    checkoutStepOnePage.completeLastNameField(lastName);
 }
 
 @Given("^I type \"([^\"]*)\" for ZIP/Postal Code$")
-public void i_type_for_ZIP_Postal_Code(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+public void i_type_for_ZIP_Postal_Code(String postalCode) {
+    checkoutStepOnePage = new CheckoutStepOnePage();
+    checkoutStepOnePage.completePostalCodeField(postalCode);
 }
 
 @When("^I click on the CONTINUE button$")
-public void i_click_on_the_CONTINUE_button() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+public void i_click_on_the_CONTINUE_button() {
+    checkoutStepOnePage.clickContinueButton();
 }
 
-@Then("^Item total will be equal to the total of items on the list$")
-public void item_total_will_be_equal_to_the_total_of_items_on_the_list() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+@Then("Item total will be equal to the {string} of items on the list")
+public void item_total_will_be_equal_to_the_of_items_on_the_list(String type) {    
+    checkoutStepTwoPage = new CheckoutStepTwoPage();
+    double calculatedTotal = checkoutStepTwoPage.addCartTotal();
+    double cartSubTotal = checkoutStepTwoPage.getCartSubtotal(type);
+
+    Assert.assertEquals(calculatedTotal, cartSubTotal);
+ 
 }
 
-@Then("^a Tax rate of (\\d+) % is applied to the total$")
-public void a_Tax_rate_of_is_applied_to_the_total(int arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-}
+@Then("a {string} rate of {int} % is applied to the total")
+public void a_rate_of_is_applied_to_the_total(String type, Integer taxRate) {  
+  double expectedTax = checkoutStepTwoPage.calculateTaxRate("tax", taxRate);
+  double displayedTax = checkoutStepTwoPage.getCartSubtotal("tax");
 
+  Assert.assertEquals(displayedTax, expectedTax);
+
+}
 
 }

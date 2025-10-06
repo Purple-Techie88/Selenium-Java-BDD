@@ -25,7 +25,7 @@ Feature: Checkout items in the basket
     And I type "EC1A 9JU" for ZIP/Postal Code
 
     When I click on the CONTINUE button
-    Then Item total will be equal to the total of items on the list
-    And a Tax rate of 8 % is applied to the total
+    Then Item total will be equal to the "subtotal" of items on the list
+    And a "Tax" rate of 8 % is applied to the total
 
 

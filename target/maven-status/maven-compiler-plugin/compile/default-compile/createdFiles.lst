@@ -1,3 +1,9 @@
 mission/BasePage.class
 utils/LoginValues.class
+mission/ShoppingCartPage.class
+mission/iniClass.class
+mission/LoginPage.class
 mission/BrowserSetup.class
+mission/SamplePage.class
+mission/LoadProp.class
+mission/InventoryPage.class
