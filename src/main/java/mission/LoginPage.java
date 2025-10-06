@@ -25,7 +25,6 @@ public class LoginPage extends BasePage{
         PageFactory.initElements(driver, this);
         }
 
-
     public void visitLoginPage(){
         driver.get(LoadProp.getProperty("url"));
 
@@ -37,6 +36,4 @@ public class LoginPage extends BasePage{
         loginButton.click();  
 
     }
-
-
 }

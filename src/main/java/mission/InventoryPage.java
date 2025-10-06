@@ -17,7 +17,4 @@ public class InventoryPage extends BasePage {
             driver.findElement(By.id(itemButtonId)).click();
         }
     }
-
-
-
 }
