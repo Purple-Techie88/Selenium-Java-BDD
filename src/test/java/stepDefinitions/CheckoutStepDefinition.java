@@ -90,19 +90,19 @@ public void i_click_on_the_CHECKOUT_button(){
 @Given("^I type \"([^\"]*)\" for First Name$")
 public void i_type_for_First_Name(String firstName){
     checkoutStepOnePage = new CheckoutStepOnePage();
-    checkoutStepOnePage.completeFirstNameField(firstName);
+    checkoutStepOnePage.completeCheckoutField("first-name", firstName);
 }
 
 @Given("^I type \"([^\"]*)\" for Last Name$")
 public void i_type_for_Last_Name(String lastName){
     checkoutStepOnePage = new CheckoutStepOnePage();
-    checkoutStepOnePage.completeLastNameField(lastName);
+    checkoutStepOnePage.completeCheckoutField("last-name", lastName);
 }
 
 @Given("^I type \"([^\"]*)\" for ZIP/Postal Code$")
 public void i_type_for_ZIP_Postal_Code(String postalCode) {
     checkoutStepOnePage = new CheckoutStepOnePage();
-    checkoutStepOnePage.completePostalCodeField(postalCode);
+    checkoutStepOnePage.completeCheckoutField("postal-code", postalCode);
 }
 
 @When("^I click on the CONTINUE button$")

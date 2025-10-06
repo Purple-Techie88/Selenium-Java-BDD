@@ -24,7 +24,7 @@ WebElement checkoutButton;
      }
 
      public List <String> getQtyForAllItems(){
-      List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-test='iventory-item']"));
+      List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-test='inventory-item']"));
       List<String> qtyNum = new ArrayList<>();
       
       for (WebElement item: cartItems){
