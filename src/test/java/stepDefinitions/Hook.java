@@ -17,12 +17,11 @@ import io.cucumber.java.Scenario;
 import mission.BasePage;
 import mission.BrowserSetup;
 import mission.LoadProp;
-import mission.iniClass;
+// import mission.iniClass;
 
-public class Hook{
+public class Hook {
 
     private static final int WAIT_SEC = 20;
-
 
     @Before
     public void initializeTest() {
@@ -32,7 +31,7 @@ public class Hook{
         BasePage.driver.manage().timeouts().pageLoadTimeout(WAIT_SEC, TimeUnit.SECONDS);
         BasePage.driver.manage().timeouts().implicitlyWait(WAIT_SEC, TimeUnit.SECONDS);
         BasePage.driver.manage().timeouts().setScriptTimeout(WAIT_SEC, TimeUnit.SECONDS);
-        new iniClass();
+        // new iniClass();
     }
 
     /**

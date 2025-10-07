@@ -7,22 +7,22 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutStepOnePage extends BasePage {
-    
-    @FindBy(id ="continue")
+
+    @FindBy(id = "continue")
     @CacheLookup
     WebElement continueButton;
 
-     public CheckoutStepOnePage() {
+    public CheckoutStepOnePage() {
         PageFactory.initElements(driver, this);
     }
 
-    public void completeCheckoutField(String fieldId, String Value){
+    public void completeCheckoutField(String fieldId, String Value) {
         WebElement field = driver.findElement(By.id(fieldId));
         field.clear();
         field.sendKeys(Value);
     }
 
-    public void clickContinueButton(){
+    public void clickContinueButton() {
         continueButton.click();
     }
 }

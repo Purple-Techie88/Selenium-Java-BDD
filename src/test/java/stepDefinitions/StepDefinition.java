@@ -8,8 +8,6 @@ import io.cucumber.java.en.When;
 
 public class StepDefinition {
 
-
-
     @Given("^I get the default list of users for on 1st page$")
     public void iGetTheDefaultListofusers() {
     }

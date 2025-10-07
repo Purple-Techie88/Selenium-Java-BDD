@@ -20,22 +20,19 @@ public class BrowserSetup extends BasePage {
 
     }
 
-
     public static String browser = null;
     private static final String CHROME_WIN = "src\\test\\java\\BrowserDirectory\\chromedriver.exe";
     private static final String EDGE = "src\\test\\java\\BrowserDirectory\\MicrosoftWebDriver.exe";
     private static final String FIREFOX_WIN = "src\\test\\java\\BrowserDirectory\\geckodriver.exe";
     private static final String CHROME_MAC = "src/test/java/BrowserDirectory/chromedriver-Mac";
 
-
     /**
      * Browser property location /src/test/java/TestData/TestData.properties
      */
-
-
     /**
      * Function for multi browser
-     * @return 
+     *
+     * @return
      */
     public WebDriver selectBrowser() {
         browser = LoadProp.getProperty("Browser");
@@ -71,6 +68,6 @@ public class BrowserSetup extends BasePage {
         } else {
             Assert.fail(MessageFormat.format("Wrong Browser: {0}", browser));
         }
-                return driver;
+        return driver;
     }
 }
