@@ -1,5 +1,5 @@
 Feature: API test
-# Please visit https://reqres.in/
+  # Please visit https://reqres.in/
 
   Scenario: Should see LIST USERS of all existing users
     Given I get the default list of users for on 1st page

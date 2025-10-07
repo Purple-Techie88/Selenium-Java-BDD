@@ -20,9 +20,9 @@ Feature: Checkout items in the basket
       | Sauce Labs Fleece Jacket |
     And I  should see 3 items added to the shopping cart
     And I click on the CHECKOUT button
-    And I type "FirstName" for First Name
-    And I type "LastName" for Last Name
-    And I type "EC1A 9JU" for ZIP/Postal Code
+    And I type "FirstName" for "First Name"
+    And I type "LastName" for "Last Name"
+    And I type "EC1A 9JU" for "ZIP/Postal Code"
 
     When I click on the CONTINUE button
     Then Item total will be equal to the "subtotal" of items on the list
