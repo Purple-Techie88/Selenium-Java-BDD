@@ -1,9 +1,10 @@
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/BasePage.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/BrowserSetup.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/CheckoutStepOnePage.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/CheckoutStepTwoPage.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/InventoryPage.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/LoadProp.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/LoginPage.java
-/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/SamplePage.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/ShoppingCartPage.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/mission/iniClass.java
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/main/java/utils/LoginValues.java
