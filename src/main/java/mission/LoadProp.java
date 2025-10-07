@@ -13,7 +13,6 @@ public class LoadProp extends BasePage {
 
     private static File currentDirectory = new File(new File("").getAbsolutePath());
 
-
     public static String getProperty(String key) {
         prop = new Properties();
 

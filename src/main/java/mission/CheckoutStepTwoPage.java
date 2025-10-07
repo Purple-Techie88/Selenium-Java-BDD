@@ -8,19 +8,19 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutStepTwoPage extends BasePage {
 
-       public CheckoutStepTwoPage() {
+    public CheckoutStepTwoPage() {
         PageFactory.initElements(driver, this);
     }
 
-    public double getCartSubtotal(String type){
+    public double getCartSubtotal(String type) {
         WebElement labelType = driver.findElement(By.cssSelector("[data-test='" + type + "-label']"));
         String labelTypeText = labelType.getText();
-        String subtotalAmount  = labelTypeText.replaceAll("[^\\d.]" , ""); 
+        String subtotalAmount = labelTypeText.replaceAll("[^\\d.]", "");
         return Double.parseDouble(subtotalAmount);
 
     }
 
-    public double addCartTotal(){
+    public double addCartTotal() {
         double total = 0.0;
 
         List<WebElement> itemPrice = BasePage.driver.findElements(By.cssSelector("[data-test='inventory-item-price']"));
@@ -33,15 +33,13 @@ public class CheckoutStepTwoPage extends BasePage {
 
     }
 
-    public double calculateTaxRate(String type, int taxRate){
+    public double calculateTaxRate(String type, int taxRate) {
         double subtotalAmount = getCartSubtotal("subtotal");
-        double expectedTax = subtotalAmount * (taxRate/100.0); 
-        expectedTax = Math.round(expectedTax * 100) / 100.0; 
-        
-        return expectedTax;
-        
-        
-    }
-    
-}
+        double expectedTax = subtotalAmount * (taxRate / 100.0);
+        expectedTax = Math.round(expectedTax * 100) / 100.0;
 
+        return expectedTax;
+
+    }
+
+}
