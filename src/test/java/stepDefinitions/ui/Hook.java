@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import java.io.File;
 import java.io.IOException;

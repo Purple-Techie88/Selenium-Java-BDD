@@ -1,4 +1,7 @@
 /Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/runners/RunnerTest.java
-/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/CheckoutStepDefinition.java
-/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/Hook.java
-/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/StepDefinition.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/api/ReqresApiStepDefinitions.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/ui/CheckoutStepDefinitions.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/ui/Hook.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/ui/InventoryStepDefinitions.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/ui/LoginStepDefinitions.java
+/Users/lamoricaswain/MissionUnderwriters/MissionQaTest/src/test/java/stepDefinitions/ui/ShoppingCartStepDefinitions.java

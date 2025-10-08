@@ -1,7 +1,7 @@
 package mission;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -23,16 +23,23 @@ public class ShoppingCartPage extends BasePage {
         shoppingCartBadge.click();
     }
 
-    public List<String> getQtyForAllItems() {
-        List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-test='inventory-item']"));
-        List<String> qtyNum = new ArrayList<>();
+    // public List<String> getQtyForAllItems() {
+        // List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-test='inventory-item']"));
+        // List<String> qtyNum = new ArrayList<>();
 
-        for (WebElement item : cartItems) {
-            WebElement itemQty = item.findElement(By.cssSelector("[data-test='item-quantity']"));
+        // for (WebElement item : cartItems) {
+        //     WebElement itemQty = item.findElement(By.cssSelector("[data-test='item-quantity']"));
 
+        // }
+        // return qtyNum;
+
+        public List<String> getQtyForAllItems() {
+            return driver.findElements(By.cssSelector("[data-test='inventory-item']"))
+                         .stream()
+                         .map(item -> item.findElement(By.cssSelector("[data-test='item-quantity']")).getText())
+                         .collect(Collectors.toList());
         }
-        return qtyNum;
-    }
+    // }
 
     public void removeItemFromCart(String item) {
         String itemButtonId = "remove-" + item.toLowerCase().replace(" ", "-");
