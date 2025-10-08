@@ -1,5 +1,5 @@
 Feature: API test
-  # Please visit https://reqres.in/
+  Please visit https://reqres.in/
 
   Scenario: Should see LIST USERS of all existing users
     Given I get the default list of users for on 1st page
@@ -20,9 +20,8 @@ Feature: API test
 
 
   Scenario Outline: CREATE a user
-    Given I create a user with following <Name> <Job>
-    Then response should contain the following data
-      | name | job | id | createdAt |
+    Given I create a user with following "<Name>" "<Job>"
+    Then response should contain the following data "<Name>" "<Job>"
 
     Examples:
       | Name  | Job     |
@@ -31,7 +30,7 @@ Feature: API test
 
 
   Scenario: LOGIN - SUCCESSFUL by a user
-    Given I login unsuccessfully with the following data
+    Given I login successfully with the following data
       | Email              | Password   |
       | eve.holt@reqres.in | cityslicka |
     Then I should get a response code of 200
@@ -42,8 +41,9 @@ Feature: API test
       | eve.holt@reqres.in |          |
     Then I should get a response code of 400
     And I should see the following response message:
-      | "error": "Missing password" |
+      | error|
+      |Missing password|
 
-  Scenario: Should see the list of users with DELAYED RESPONSE
-    Given I wait for the user list to load
-    Then I should see that every user has a unique id
+Scenario: Should see the list of users with DELAYED RESPONSE
+  Given I wait for the user list to load
+  Then I should see that every user has a unique id
