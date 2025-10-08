@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import mission.LoadProp;
 
-public class StepDefinition {
+public class ReqresApiStepDefinitions {
 
     // Base URL can be moved to properties later
     private final String baseUrl = LoadProp.getProperty("API_BASE_URL");
