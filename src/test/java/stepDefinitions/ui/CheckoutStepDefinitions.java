@@ -59,8 +59,7 @@ public class CheckoutStepDefinitions {
         double expectedTax = checkoutStepTwoPage.calculateTaxRate("tax", taxRate);
         double displayedTax = checkoutStepTwoPage.getCartSubtotal("tax");
 
-        System.out.println("Expected Tax: " + expectedTax);
-        System.out.println("Displayed Tax: " + displayedTax);
+        System.out.println("Expected Tax: " + expectedTax + "Displayed Tax: " + displayedTax);
 
         Assert.assertEquals(displayedTax, expectedTax);
 
