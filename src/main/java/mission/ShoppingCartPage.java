@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
 
 public class ShoppingCartPage extends BasePage {
 
@@ -15,23 +15,13 @@ public class ShoppingCartPage extends BasePage {
     @CacheLookup
     WebElement checkoutButton;
 
-    public ShoppingCartPage() {
-        PageFactory.initElements(driver, this);
-    }
+    public ShoppingCartPage(WebDriver driver) {
+    super(driver);
+   }
 
     public void clickShoppingCartButton() {
         shoppingCartBadge.click();
     }
-
-    // public List<String> getQtyForAllItems() {
-        // List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-test='inventory-item']"));
-        // List<String> qtyNum = new ArrayList<>();
-
-        // for (WebElement item : cartItems) {
-        //     WebElement itemQty = item.findElement(By.cssSelector("[data-test='item-quantity']"));
-
-        // }
-        // return qtyNum;
 
         public List<String> getQtyForAllItems() {
             return driver.findElements(By.cssSelector("[data-test='inventory-item']"))
@@ -39,7 +29,6 @@ public class ShoppingCartPage extends BasePage {
                          .map(item -> item.findElement(By.cssSelector("[data-test='item-quantity']")).getText())
                          .collect(Collectors.toList());
         }
-    // }
 
     public void removeItemFromCart(String item) {
         String itemButtonId = "remove-" + item.toLowerCase().replace(" ", "-");

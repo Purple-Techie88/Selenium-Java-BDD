@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
 
 public class CheckoutStepTwoPage extends BasePage {
 
-    public CheckoutStepTwoPage() {
-        PageFactory.initElements(driver, this);
+    public CheckoutStepTwoPage(WebDriver driver) {
+        super(driver);
     }
 
     public double getCartSubtotal(String type) {
@@ -23,7 +23,7 @@ public class CheckoutStepTwoPage extends BasePage {
     public double addCartTotal() {
         double total = 0.0;
 
-        List<WebElement> itemPrice = BasePage.driver.findElements(By.cssSelector("[data-test='inventory-item-price']"));
+        List<WebElement> itemPrice = driver.findElements(By.cssSelector("[data-test='inventory-item-price']"));
         for (WebElement itemTotalPrice : itemPrice) {
 
             String itemPriceText = itemTotalPrice.getText().replace("$", "").trim();
