@@ -10,12 +10,19 @@ import mission.CheckoutStepTwoPage;
 
 public class CheckoutStepDefinitions {
 
-    CheckoutStepOnePage checkoutStepOnePage;
-    CheckoutStepTwoPage checkoutStepTwoPage;
 
+    private  Hooks hooks; // Inject hooks
+    private final CheckoutStepOnePage checkoutStepOnePage;
+    private final CheckoutStepTwoPage checkoutStepTwoPage;
+
+    public CheckoutStepDefinitions(Hooks hooks) {
+        this.hooks = hooks;
+        this.checkoutStepOnePage = hooks.checkoutStepOnePage;
+        this.checkoutStepTwoPage = hooks.checkoutStepTwoPage;
+
+    }
     @And("^I type \"([^\"]*)\" for \"([^\"]*)\"$")
     public void i_type_for_First_Name(String value, String fieldName) {
-        checkoutStepOnePage = new CheckoutStepOnePage();
 
         String fieldId;
         switch (fieldName) {
@@ -43,7 +50,6 @@ public class CheckoutStepDefinitions {
 
     @Then("Item total will be equal to the {string} of items on the list")
     public void item_total_will_be_equal_to_the_of_items_on_the_list(String type) {
-        checkoutStepTwoPage = new CheckoutStepTwoPage();
         double calculatedTotal = checkoutStepTwoPage.addCartTotal();
         double cartSubTotal = checkoutStepTwoPage.getCartSubtotal(type);
 

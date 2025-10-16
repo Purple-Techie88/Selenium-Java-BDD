@@ -1,9 +1,9 @@
 package mission;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
 
@@ -19,8 +19,8 @@ public class LoginPage extends BasePage {
     @CacheLookup
     private WebElement loginButton;
 
-    public LoginPage() {
-        PageFactory.initElements(driver, this);
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
     public void visitLoginPage() {

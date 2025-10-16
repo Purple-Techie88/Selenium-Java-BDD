@@ -13,61 +13,45 @@ import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class BrowserSetup extends BasePage {
+public class BrowserSetup {
 
-    public BrowserSetup(WebDriver driver) {
-        this.driver = driver;
+    public static WebDriver selectBrowser() {
+        String browser = LoadProp.getProperty("Browser");
+        WebDriver driver;
 
-    }
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                ChromeOptions options = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("profile.password_manager_leak_detection", false);
+                options.setExperimentalOption("prefs", prefs);
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(options);
+                break;
 
-    public static String browser = null;
-    private static final String CHROME_WIN = "src\\test\\java\\BrowserDirectory\\chromedriver.exe";
-    private static final String EDGE = "src\\test\\java\\BrowserDirectory\\MicrosoftWebDriver.exe";
-    private static final String FIREFOX_WIN = "src\\test\\java\\BrowserDirectory\\geckodriver.exe";
-    private static final String CHROME_MAC = "src/test/java/BrowserDirectory/chromedriver-Mac";
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                break;
 
-    /**
-     * Browser property location /src/test/java/TestData/TestData.properties
-     */
-    /**
-     * Function for multi browser
-     *
-     * @return
-     */
-    public WebDriver selectBrowser() {
-        browser = LoadProp.getProperty("Browser");
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
 
-        if (browser.equalsIgnoreCase("Chrome")) {
-            //System.setProperty("webdriver.chrome.driver", CHROME_WIN);
-            ChromeOptions options = new ChromeOptions();
-            Map<String, Object> prefs = new HashMap<>();
-            prefs.put("profile.password_manager_leak_detection", false);
-            options.setExperimentalOption("prefs", prefs);
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(options);
-        } else if (browser.equalsIgnoreCase("edge")) {
-            //System.setProperty("webdriver.edge.driver", EDGE);
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-        } else if (browser.equalsIgnoreCase("Firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            //System.setProperty("webdriver.gecko.driver", FIREFOX_WIN);
-            driver = new FirefoxDriver();
-        } else if (browser.equalsIgnoreCase("chromeMac")) {
-            //System.setProperty("webdriver.chrome.driver", CHROME_MAC);
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("chromeHeadless")) {
-            //System.setProperty("webdriver.chrome.driver", CHROME_MAC);
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--headless");
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(chromeOptions);
-        } else if (browser.equalsIgnoreCase("api")) {
+            case "chromeheadless":
+                ChromeOptions headless = new ChromeOptions();
+                headless.addArguments("--headless");
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(headless);
+                break;
 
-        } else {
-            Assert.fail(MessageFormat.format("Wrong Browser: {0}", browser));
+            default:
+                Assert.fail(MessageFormat.format("Wrong Browser: {0}", browser));
+                return null;
         }
+
+        driver.manage().window().maximize();
         return driver;
     }
 }

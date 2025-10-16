@@ -3,12 +3,12 @@ package mission;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
 
 public class InventoryPage extends BasePage {
 
-    public InventoryPage() {
-        PageFactory.initElements(driver, this);
+    public InventoryPage(WebDriver driver) {
+    super(driver);
     }
 
     public void addItemsToCart(List<String> items) {

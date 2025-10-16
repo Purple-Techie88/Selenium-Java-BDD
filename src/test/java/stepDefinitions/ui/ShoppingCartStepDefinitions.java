@@ -9,20 +9,27 @@ import io.cucumber.java.en.And;
 import mission.BasePage;
 import mission.ShoppingCartPage;
 
+
 public class ShoppingCartStepDefinitions {
 
-    ShoppingCartPage shoppingCartPage;
-    BasePage basePage;
+    private  Hooks hooks; // Inject hooks
+    final   ShoppingCartPage shoppingCartPage;
+    private BasePage basePage;
+
+
+    public ShoppingCartStepDefinitions(Hooks hooks) {
+        this.hooks = hooks;
+        this.shoppingCartPage = hooks.shoppingCartPage;
+        basePage = hooks.basePage; // Use the page object initialized in Hooks
+    }
 
     @And("^I  should see (\\d+) items added to the shopping cart$")
     public void i_should_see_items_added_to_the_shopping_cart(int itemsAdded) {
-        basePage = new BasePage();
         Assert.assertEquals(basePage.getCartItemCount(), itemsAdded);
     }
 
     @And("^I click on the shopping cart$")
     public void i_click_on_the_shopping_cart() {
-        shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.clickShoppingCartButton();
     }
 
