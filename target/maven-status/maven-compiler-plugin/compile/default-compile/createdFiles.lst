@@ -1,7 +1,11 @@
 mission/BasePage.class
+mission/CheckoutStepTwoPage.class
 utils/LoginValues.class
 mission/ShoppingCartPage.class
+mission/iniClass.class
 mission/LoginPage.class
 mission/BrowserSetup.class
 mission/LoadProp.class
+mission/CheckoutStepOnePage.class
+mission/BaseTest.class
 mission/InventoryPage.class
